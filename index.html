@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZHIHUAN LIN</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --primary-color: #3b82f6;
+            --primary-dark: #1e40af;
+            --text-light: #f3f4f6;
+            --text-dark: #1f2937;
+            --bg-dark: #0f172a;
+            --bg-darker: #020617;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            min-height: 100vh;
+        }
+        
+        .bg-gradient-custom {
+            background: linear-gradient(135deg, var(--bg-darker) 0%, var(--bg-dark) 100%);
+        }
+        
+        .text-glow {
+            text-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        
+        .btn-outline {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-outline:hover {
+            background-color: rgba(59, 130, 246, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .album-card {
+            transition: all 0.3s ease;
+        }
+        
+        .album-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.1);
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .mobile-nav-link {
+            position: relative;
+            display: inline-block;
+        }
+
+        .mobile-nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #3b82f6;
+            transition: width 0.3s ease;
+        }
+
+        .mobile-nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* 联系表单样式 */
+        .field {
+          margin-bottom: 10px;
+        }
+
+        .field label {
+          display: block;
+          font-size: 12px;
+          color: #777;
+        }
+
+        .field input {
+          display: block;
+          min-width: 250px;
+          line-height: 1.5;
+          font-size: 14px;
+        }
+
+        input[type="submit"] {
+          display: block;
+          padding: 6px 30px;
+          font-size: 14px;
+          background-color: #4460AA;
+          color: #fff;
+          border: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="fixed w-full z-50 bg-darker/80 backdrop-blur-md">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="#home" class="text-2xl font-bold tracking-wider text-white">ZHIHUAN LIN</a>
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="nav-link text-gray-300 hover:text-white">首页</a>
+                <a href="#music" class="nav-link text-gray-300 hover:text-white">音乐</a>
+                <a href="#video" class="nav-link text-gray-300 hover:text-white">视频</a>
+                <a href="#previous-works" class="nav-link text-gray-300 hover:text-white">往期制作</a>
+                <a href="#artist" class="nav-link text-gray-300 hover:text-white">艺术家</a>
+                <a href="#contact" class="nav-link text-gray-300 hover:text-white">联系</a>
+            </div>
+            <button class="md:hidden text-2xl text-white" id="menu-toggle">
+                <i class="fa fa-bars"></i>
+            </button>
+        </div>
+        <!-- 移动菜单 -->
+        <div class="md:hidden hidden bg-darker/95 backdrop-blur-md border-b border-gray-800 absolute top-0 left-0 w-full z-50" id="mobile-menu">
+            <div class="container mx-auto px-4 py-4 flex flex-col space-y-2">
+                <a href="#home" class="mobile-nav-link text-white hover:text-blue-300 py-3 border-b border-gray-800 transition-colors duration-300">首页</a>
+                <a href="#music" class="mobile-nav-link text-white hover:text-blue-300 py-3 border-b border-gray-800 transition-colors duration-300">音乐</a>
+                <a href="#video" class="mobile-nav-link text-white hover:text-blue-300 py-3 border-b border-gray-800 transition-colors duration-300">视频</a>
+                <a href="#previous-works" class="mobile-nav-link text-white hover:text-blue-300 py-3 border-b border-gray-800 transition-colors duration-300">往期制作</a>
+                <a href="#artist" class="mobile-nav-link text-white hover:text-blue-300 py-3 border-b border-gray-800 transition-colors duration-300">艺术家</a>
+                <a href="#contact" class="mobile-nav-link text-white hover:text-blue-300 py-3 transition-colors duration-300">联系</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 首页 -->
+    <section id="home" class="pt-32 pb-20 md:pt-40 md:pb-28 bg-gradient-custom relative overflow-hidden">
+        <!-- 背景装饰 -->
+        <div class="absolute top-0 right-0 w-1/2 h-full opacity-10 pointer-events-none">
+            <div class="absolute top-1/4 right-1/4 w-64 h-64 rounded-full bg-blue-500 blur-3xl"></div>
+            <div class="absolute bottom-1/3 right-1/3 w-40 h-40 rounded-full bg-indigo-500 blur-3xl"></div>
+        </div>
+        
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="flex flex-col items-center text-center">
+                <h1 class="text-5xl md:text-7xl font-bold mb-6 text-white text-glow tracking-tighter">ZHIHUAN LIN</h1>
+                <p class="text-xl md:text-2xl text-blue-300 mb-10 max-w-2xl">独立音乐人 & 制作人 · 艺名 LanKi兰基</p>
+                
+                <div class="flex flex-wrap justify-center gap-4 mb-16">
+                    <a href="#music" class="btn-primary px-8 py-3 rounded-full text-white font-medium flex items-center gap-2">
+                        立即聆听 <i class="fa fa-play"></i>
+                    </a>
+                    <a href="#video" class="btn-outline px-8 py-3 rounded-full font-medium flex items-center gap-2">
+                        观看视频 <i class="fa fa-video"></i>
+                    </a>
+                </div>
+                
+                <div class="flex items-center justify-center gap-8 text-gray-400 mt-8">
+                    <a href="https://space.bilibili.com/49943449?spm_id_from=333.1007.0.0" target="_blank" class="hover:text-white transition-colors flex flex-col items-center relative group transition-all duration-300 hover:-translate-y-3 hover:shadow-lg hover:shadow-blue-500/20">
+                        <img src="./Images/哔哩哔哩.png" alt="哔哩哔哩" class="w-10 h-10 mb-2 object-contain">
+                        <span class="absolute -bottom-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs py-1 px-3 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">哔哩哔哩</span>
+                    </a>
+                    <a href="https://www.xiaohongshu.com/user/profile/64b5067b000000002b0084e5" target="_blank" class="hover:text-white transition-colors flex flex-col items-center relative group transition-all duration-300 hover:-translate-y-3 hover:shadow-lg hover:shadow-blue-500/20">
+                        <img src="./Images/小红书.png" alt="小红书" class="w-10 h-10 mb-2 object-contain">
+                        <span class="absolute -bottom-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs py-1 px-3 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">小红书</span>
+                    </a>
+                    <a href="https://v.douyin.com/A9B-tAOpcrE/" target="_blank" class="hover:text-white transition-colors flex flex-col items-center relative group transition-all duration-300 hover:-translate-y-3 hover:shadow-lg hover:shadow-blue-500/20">
+                        <img src="./Images/抖音.png" alt="抖音" class="w-10 h-10 mb-2 object-contain">
+                        <span class="absolute -bottom-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs py-1 px-3 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">抖音</span>
+                    </a>
+                    <a href="https://y.qq.com/n/ryqq/singer/002lg1WQ3B4dHI" target="_blank" class="hover:text-white transition-colors flex flex-col items-center relative group transition-all duration-300 hover:-translate-y-3 hover:shadow-lg hover:shadow-blue-500/20">
+                        <img src="./Images/QQ音乐.png" alt="QQ音乐" class="w-10 h-10 mb-2 object-contain">
+                        <span class="absolute -bottom-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs py-1 px-3 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">QQ音乐</span>
+                    </a>
+                    <a href="https://music.163.com/#/artist?id=32980792" target="_blank" class="hover:text-white transition-colors flex flex-col items-center relative group transition-all duration-300 hover:-translate-y-3 hover:shadow-lg hover:shadow-blue-500/20">
+                        <img src="./Images/网易云音乐.png" alt="网易云音乐" class="w-10 h-10 mb-2 object-contain">
+                        <span class="absolute -bottom-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs py-1 px-3 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">网易云音乐</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 音乐作品 -->
+    <section id="music" class="py-20 bg-darker">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white">音乐</h2>
+            </div>
+
+            <!-- 专辑列表 -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- 专辑1 -->
+                <div class="album-card bg-gray-900 rounded-lg overflow-hidden">
+                    <div class="relative">
+                        <img src="./Images/nihil_cover.jpg" alt="专辑封面 'Mount Agung'" class="w-full aspect-square object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                            <audio class="album-audio" preload="metadata">
+                                <source src="./Audio/Mount Agung.mp3" type="audio/mpeg">
+                                您的浏览器不支持音频元素。
+                            </audio>
+                            <button class="w-16 h-16 rounded-full bg-blue-600/90 flex items-center justify-center play-button hover:bg-blue-700 transition-colors">
+                                <i class="fa fa-play text-white text-2xl"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="text-xl font-semibold mb-1 text-white">Mount Agung - NIHIL Vol.2</h4>
+
+                    </div>
+                </div>
+
+                <!-- 专辑2 -->
+                <div class="album-card bg-gray-900 rounded-lg overflow-hidden">
+                    <div class="relative">
+                        <img src="./Images/new_soul_cover.jpg" alt="专辑封面 '超文明'" class="w-full aspect-square object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                            <audio class="album-audio" preload="metadata">
+                                <source src="./Audio/超文明.mp3" type="audio/mpeg">
+                                您的浏览器不支持音频元素。
+                            </audio>
+                            <button class="w-16 h-16 rounded-full bg-blue-600/90 flex items-center justify-center play-button hover:bg-blue-700 transition-colors">
+                                <i class="fa fa-play text-white text-2xl"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="text-xl font-semibold mb-1 text-white">超文明 - NIHIL Vol.1</h4>
+
+                    </div>
+                </div>
+
+                <!-- 专辑3 -->
+                <div class="album-card bg-gray-900 rounded-lg overflow-hidden">
+                    <div class="relative">
+                        <img src="./Images/losing_you_cover.jpg" alt="专辑封面 'losing you'" class="w-full aspect-square object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                            <audio class="album-audio" preload="metadata">
+                                <source src="./Audio/losing you.mp3" type="audio/mpeg">
+                                您的浏览器不支持音频元素。
+                            </audio>
+                            <button class="w-16 h-16 rounded-full bg-blue-600/90 flex items-center justify-center play-button hover:bg-blue-700 transition-colors">
+                                <i class="fa fa-play text-white text-2xl"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="text-xl font-semibold mb-1 text-white">losing you</h4>
+
+                    </div>
+                </div>
+                <!-- 专辑4 -->
+                <div class="album-card bg-gray-900 rounded-lg overflow-hidden">
+                    <div class="relative">
+                        <img src="./Images/Freedom Cry.jpg" alt="专辑封面 'Freedom Cry'" class="w-full aspect-square object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                            <audio class="album-audio" preload="metadata">
+                                <source src="./Audio/Freedom Cry.mp3" type="audio/mpeg">
+                                您的浏览器不支持音频元素。
+                            </audio>
+                            <button class="w-16 h-16 rounded-full bg-blue-600/90 flex items-center justify-center play-button hover:bg-blue-700 transition-colors">
+                                <i class="fa fa-play text-white text-2xl"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="text-xl font-semibold mb-1 text-white">Freedom Cry - Chen-ing Music/Macrame Music</h4>
+
+                    </div>
+                </div>
+
+                <!-- 专辑5 -->
+                <div class="album-card bg-gray-900 rounded-lg overflow-hidden">
+                    <div class="relative">
+                        <img src="./Images/Soul love.jpg" alt="专辑封面 'Soul Love'" class="w-full aspect-square object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                            <audio class="album-audio" preload="metadata">
+                                <source src="./Audio/Soul Love.mp3" type="audio/mpeg">
+                                您的浏览器不支持音频元素。
+                            </audio>
+                            <button class="w-16 h-16 rounded-full bg-blue-600/90 flex items-center justify-center play-button hover:bg-blue-700 transition-colors">
+                                <i class="fa fa-play text-white text-2xl"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="text-xl font-semibold mb-1 text-white">Soul Love</h4>
+
+                    </div>
+                </div>
+
+                <!-- 专辑6 -->
+                <div class="album-card bg-gray-900 rounded-lg overflow-hidden">
+                    <div class="relative">
+                        <img src="./Images/new_cover.jpg" alt="专辑封面 'untitled'" class="w-full aspect-square object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                            <audio class="album-audio" preload="metadata">
+                                <source src="./Audio/untitled.mp3" type="audio/mpeg">
+                                您的浏览器不支持音频元素。
+                            </audio>
+                            <button class="w-16 h-16 rounded-full bg-blue-600/90 flex items-center justify-center play-button hover:bg-blue-700 transition-colors">
+                                <i class="fa fa-play text-white text-2xl"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="text-xl font-semibold mb-1 text-white">untitled</h4>
+
+                    </div>
+                </div>
+
+                <!-- 专辑7 -->
+                <div class="album-card bg-gray-900 rounded-lg overflow-hidden">
+                    <div class="relative">
+                        <img src="./Images/IT AINT RIGHT.jpg" alt="专辑封面 'IT AINT RIGHT'" class="w-full aspect-square object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                            <audio class="album-audio" preload="metadata">
+                                <source src="./Audio/IT AINT RIGHT-Rekon.mp3" type="audio/mpeg">
+                                您的浏览器不支持音频元素。
+                            </audio>
+                            <button class="w-16 h-16 rounded-full bg-blue-600/90 flex items-center justify-center play-button hover:bg-blue-700 transition-colors">
+                                <i class="fa fa-play text-white text-2xl"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="text-xl font-semibold mb-1 text-white">IT AINT RIGHT</h4>
+
+                    </div>
+                </div>
+
+                <!-- 专辑8 -->
+                <div class="album-card bg-gray-900 rounded-lg overflow-hidden">
+                    <div class="relative">
+                        <img src="./Images/Virtual Journey.jpg" alt="专辑封面 'Virtual Journey-DC/MYCH/Ropaer'" class="w-full aspect-square object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                            <audio class="album-audio" preload="metadata">
+                                <source src="./Audio/Virtual Journey.mp3" type="audio/mpeg">
+                                您的浏览器不支持音频元素。
+                            </audio>
+                            <button class="w-16 h-16 rounded-full bg-blue-600/90 flex items-center justify-center play-button hover:bg-blue-700 transition-colors">
+                                <i class="fa fa-play text-white text-2xl"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="text-xl font-semibold mb-1 text-white">Virtual Journey - DC/MYCH/Ropaer</h4>
+
+                    </div>
+                </div>
+
+                <!-- 专辑9 -->
+                <div class="album-card bg-gray-900 rounded-lg overflow-hidden">
+                    <div class="relative">
+                        <img src="./Images/FUTURE.jpg" alt="专辑封面 'FUTURE'" class="w-full aspect-square object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                            <audio class="album-audio" preload="metadata">
+                                <source src="./Audio/FUTURE.mp3" type="audio/mpeg">
+                                您的浏览器不支持音频元素。
+                            </audio>
+                            <button class="w-16 h-16 rounded-full bg-blue-600/90 flex items-center justify-center play-button hover:bg-blue-700 transition-colors">
+                                <i class="fa fa-play text-white text-2xl"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="text-xl font-semibold mb-1 text-white">FUTURE</h4>
+
+                    </div>
+                </div>
+
+                <!-- 专辑10 -->
+                <div class="album-card bg-gray-900 rounded-lg overflow-hidden">
+                    <div class="relative">
+                        <img src="./Images/S C A R.jpg" alt="专辑封面 'S C A R'" class="w-full aspect-square object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                            <audio class="album-audio" preload="metadata">
+                                <source src="./Audio/S C A R.mp3" type="audio/mpeg">
+                                您的浏览器不支持音频元素。
+                            </audio>
+                            <button class="w-16 h-16 rounded-full bg-blue-600/90 flex items-center justify-center play-button hover:bg-blue-700 transition-colors">
+                                <i class="fa fa-play text-white text-2xl"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="text-xl font-semibold mb-1 text-white">S C A R</h4>
+
+                    </div>
+                </div>
+
+                <!-- 专辑11 -->
+                <div class="album-card bg-gray-900 rounded-lg overflow-hidden">
+                    <div class="relative">
+                        <img src="./Images/VoI(e````e.jpg" alt="专辑封面 'VoI(e````e'" class="w-full aspect-square object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                            <audio class="album-audio" preload="metadata">
+                                <source src="./Audio/VoI(e````e.mp3" type="audio/mpeg">
+                                您的浏览器不支持音频元素。
+                            </audio>
+                            <button class="w-16 h-16 rounded-full bg-blue-600/90 flex items-center justify-center play-button hover:bg-blue-700 transition-colors">
+                                <i class="fa fa-play text-white text-2xl"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="text-xl font-semibold mb-1 text-white">VoI(e````e</h4>
+
+                    </div>
+                </div>
+
+                <!-- 专辑12 -->
+                <div class="album-card bg-gray-900 rounded-lg overflow-hidden">
+                    <div class="relative">
+                        <img src="./Images/Noise.jpg" alt="专辑封面 'NoisE'" class="w-full aspect-square object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                            <audio class="album-audio" preload="metadata">
+                                <source src="./Audio/Noise.mp3" type="audio/mpeg">
+                                您的浏览器不支持音频元素。
+                            </audio>
+                            <button class="w-16 h-16 rounded-full bg-blue-600/90 flex items-center justify-center play-button hover:bg-blue-700 transition-colors">
+                                <i class="fa fa-play text-white text-2xl"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="text-xl font-semibold mb-1 text-white">NoisE</h4>
+
+                    </div>
+                </div>
+            </div>
+       <div class="text-center mt-12 text-gray-400">
+                <p>待上传,更多请前往平台收听~</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 视频 -->
+    <section id="video" class="py-20 bg-dark">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white">视频</h2>
+            </div>
+
+            <!-- 视频网格布局 -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- 视频1 -->
+                <div class="album-card bg-gray-900 rounded-lg overflow-hidden cursor-pointer" id="video-card-1">
+                    <div class="relative">
+                        <img src="./Images/视频封面1.jpg" alt="视频封面 '上海库璐璐音游嘉年华'" class="w-full aspect-square object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                            <button class="w-16 h-16 rounded-full bg-blue-600/90 flex items-center justify-center play-button hover:bg-blue-700 transition-colors" id="video-play-btn-1">
+                                <i class="fa fa-play text-white text-2xl"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="text-xl font-semibold mb-1 text-white">上海库璐璐音游嘉年华</h4>
+                        <p class="text-gray-400">Work:电子舞曲制作</p>
+                    </div>
+                </div>
+
+                <!-- 视频2 -->
+                <div class="album-card bg-gray-900 rounded-lg overflow-hidden cursor-pointer" id="video-card-2">
+                    <div class="relative">
+                        <img src="./Images/视频封面2.png" alt="视频封面 '《湾区城影》视听装置'" class="w-full aspect-square object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                            <button class="w-16 h-16 rounded-full bg-blue-600/90 flex items-center justify-center play-button hover:bg-blue-700 transition-colors" id="video-play-btn-2">
+                                <i class="fa fa-play text-white text-2xl"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="text-xl font-semibold mb-1 text-white">《湾区城影》视听装置</h4>
+                        <p class="text-gray-400">Work:音乐&音效制作</p>
+                    </div>
+                </div>
+                
+                <!-- 视频3 -->
+                <div class="album-card bg-gray-900 rounded-lg overflow-hidden cursor-pointer" id="video-card-3">
+                    <div class="relative">
+                        <img src="./Images/视频封面3.png" alt="视频封面 '个人游戏制作:相位处决'" class="w-full aspect-square object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                            <button class="w-16 h-16 rounded-full bg-blue-600/90 flex items-center justify-center play-button hover:bg-blue-700 transition-colors" id="video-play-btn-3">
+                                <i class="fa fa-play text-white text-2xl"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="text-xl font-semibold mb-1 text-white">个人游戏制作:相位处决</h4>
+                        <p class="text-gray-400">Work:游戏制作、游戏音频工程<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;音乐&音效制作</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 视频模态框 -->
+            <div class="fixed inset-0 bg-black/90 z-50 hidden items-center justify-center" id="video-modal">
+                <button class="absolute top-6 right-6 text-white text-3xl hover:text-gray-300 transition-colors z-10" id="close-modal">
+                    <i class="fa fa-times"></i>
+                </button>
+                <div class="relative w-full p-1 md:p-2" style="max-width: 70vw; max-height: 80vh; box-sizing: border-box;">
+                    <div class="aspect-w-16 aspect-h-9 w-full" style="position: relative; padding-top: 56.25%; height: 0;">
+                        <iframe class="absolute top-0 left-0 w-full h-full" id="modal-iframe" frameborder="0" allowfullscreen style="box-sizing: border-box;"></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                // 视频模态框控制
+                const videoCard1 = document.getElementById('video-card-1');
+                const videoPlayBtn1 = document.getElementById('video-play-btn-1');
+                const videoCard2 = document.getElementById('video-card-2');
+                const videoPlayBtn2 = document.getElementById('video-play-btn-2');
+                const videoModal = document.getElementById('video-modal');
+                const closeModal = document.getElementById('close-modal');
+                const modalIframe = document.getElementById('modal-iframe');
+
+                // 点击视频卡片或播放按钮打开模态框
+                function openVideoModal(videoUrl) {
+                    console.log('尝试打开视频:', videoUrl);
+                    // 处理B站视频链接
+                    if (videoUrl.includes('bilibili.com')) {
+                        // 提取BV号
+                        const bvMatch = videoUrl.match(/BV[0-9A-Za-z]+/);
+                        if (bvMatch) {
+                            const bvId = bvMatch[0];
+                            console.log('B站视频BV号:', bvId);
+                            // 使用B站标准iframe嵌入，添加宽屏模式参数
+                            const embedUrl = `https://player.bilibili.com/player.html?bvid=${bvId}&page=1&high_quality=1&danmaku=0&autoplay=1&as_wide=1`;
+                            console.log('B站嵌入URL:', embedUrl);
+                            modalIframe.src = embedUrl;
+                            // 确保iframe属性正确
+                            modalIframe.setAttribute('width', '100%');
+                            modalIframe.setAttribute('height', '100%');
+                            modalIframe.setAttribute('frameborder', '0');
+                            modalIframe.setAttribute('allowfullscreen', 'true');
+                            modalIframe.setAttribute('allow', 'autoplay; encrypted-media');
+                            // 设置iframe样式以填满容器
+                            modalIframe.style.width = '100%';
+                            modalIframe.style.height = '100%';
+                            console.log('设置iframe尺寸:', modalIframe.style.width, modalIframe.style.height);
+                        } else {
+                            console.error('无法从URL中提取BV号:', videoUrl);
+                            alert('无法播放该B站视频，URL格式不正确');
+                            return;
+                        }
+                    }
+                    // 处理小红书视频链接
+                    else if (videoUrl.includes('xiaohongshu.com')) {
+                        // 在新标签页打开小红书视频
+                        window.open(videoUrl, '_blank');
+                        // 不打开模态框
+                        return;
+                    }
+                    // 处理其他视频链接
+                    else {
+                        console.error('不支持的视频链接类型:', videoUrl);
+                        alert('不支持的视频链接类型');
+                        return;
+                    }
+
+                    videoModal.classList.remove('hidden');
+                    videoModal.classList.add('flex');
+                    document.body.style.overflow = 'hidden'; // 防止背景滚动
+                    console.log('视频模态框已打开');
+                }
+
+                // 视频1事件监听 (B站)
+                videoCard1.addEventListener('click', () => {
+                    openVideoModal('https://www.bilibili.com/video/BV1ax4y1x7En/?spm_id_from=333.337.search-card.all.click&vd_source=85f1b5a9bef18941dece373068e086bd');
+                });
+                videoPlayBtn1.addEventListener('click', (e) => {
+                    e.stopPropagation(); // 防止事件冒泡到卡片
+                    openVideoModal('https://www.bilibili.com/video/BV1ax4y1x7En/?spm_id_from=333.337.search-card.all.click&vd_source=85f1b5a9bef18941dece373068e086bd');
+                });
+
+                // 视频2事件监听 (B站)
+                videoCard2.addEventListener('click', () => {
+                    openVideoModal('https://www.bilibili.com/video/BV1seYKzFEQj/?spm_id_from=333.1387.homepage.video_card.click&vd_source=85f1b5a9bef18941dece373068e086bd');
+                });
+                videoPlayBtn2.addEventListener('click', (e) => {
+                    e.stopPropagation(); // 防止事件冒泡到卡片
+                    openVideoModal('https://www.bilibili.com/video/BV1seYKzFEQj/?spm_id_from=333.1387.homepage.video_card.click&vd_source=85f1b5a9bef18941dece373068e086bd');
+                });
+                
+                // 视频3事件监听 (B站)
+                const videoCard3 = document.getElementById('video-card-3');
+                const videoPlayBtn3 = document.getElementById('video-play-btn-3');
+                
+                videoCard3.addEventListener('click', () => {
+                    openVideoModal('https://www.bilibili.com/video/BV1bmYjzcEsy/?spm_id_from=333.1387.homepage.video_card.click&vd_source=3e70ada573179487ecb21f290bc46874');
+                });
+                videoPlayBtn3.addEventListener('click', (e) => {
+                    e.stopPropagation(); // 防止事件冒泡到卡片
+                    openVideoModal('https://www.bilibili.com/video/BV1bmYjzcEsy/?spm_id_from=333.1387.homepage.video_card.click&vd_source=3e70ada573179487ecb21f290bc46874');
+                });
+
+                // 点击关闭按钮关闭模态框
+                closeModal.addEventListener('click', () => {
+                    videoModal.classList.add('hidden');
+                    videoModal.classList.remove('flex');
+                    // 重置iframe以停止视频播放
+                    if (modalIframe) {
+                        modalIframe.src = '';
+                    }
+                    document.body.style.overflow = ''; // 恢复背景滚动
+                });
+
+                // 往期制作部分视频事件监听 (B站)
+                // 确保在DOM完全加载后再执行
+                document.addEventListener('DOMContentLoaded', function() {
+                    const previousVideoCard1 = document.getElementById('previous-video-card-1');
+                    const previousVideoPlayBtn1 = document.getElementById('previous-video-play-btn-1');
+                    
+                    if (previousVideoCard1) {
+                        previousVideoCard1.addEventListener('click', () => {
+                            openVideoModal('https://www.bilibili.com/video/BV1ZhYEzSEps/?spm_id_from=333.1387.homepage.video_card.click&vd_source=3e70ada573179487ecb21f290bc46874');
+                        });
+                        console.log('已为previous-video-card-1添加点击事件');
+                    } else {
+                        console.error('未找到previous-video-card-1元素');
+                    }
+                    
+                    if (previousVideoPlayBtn1) {
+                        previousVideoPlayBtn1.addEventListener('click', (e) => {
+                            e.stopPropagation(); // 防止事件冒泡到卡片
+                            openVideoModal('https://www.bilibili.com/video/BV1ZhYEzSEps/?spm_id_from=333.1387.homepage.video_card.click&vd_source=3e70ada573179487ecb21f290bc46874');
+                        });
+                        console.log('已为previous-video-play-btn-1添加点击事件');
+                    } else {
+                        console.error('未找到previous-video-play-btn-1元素');
+                    }
+                });
+                
+                // 点击模态框外部关闭模态框
+                videoModal.addEventListener('click', (e) => {
+                    if (e.target === videoModal) {
+                        closeModal.click();
+                    }
+                });
+            </script>
+         </div>
+       <div class="text-center mt-12 text-gray-400">
+                <p>待上传,更多请前往平台观看~</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 往期制作 -->
+    <section id="previous-works" class="py-20 bg-gray-900">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white">往期制作</h2>
+            </div>
+
+            <!-- 音频部分 -->
+            <div class="mb-16">
+                <h3 class="text-2xl font-semibold mb-8 text-white text-center">音频</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                <!-- 管弦乐片段练习 -->
+                <div class="bg-gray-800 rounded-lg p-6 hover:bg-gray-700 transition-colors">
+                    <h3 class="text-xl font-semibold mb-2 text-white">管弦乐片段练习</h3>
+                    <p class="text-gray-400 mb-4">管弦乐</p>
+                    <audio controls class="w-full bg-gray-900 rounded-lg p-2">
+                        <source src="./Audio/管弦乐片段练习.mp3" type="audio/mpeg">
+                        您的浏览器不支持音频元素。
+                    l- 您浏  ntrols class="w-full bg-gray-900 rounded-lg p-2">
+                        <source src="./Audio/Color Bass_25-01-21.mp3" type="audio/mpeg">
+                        您的浏览器不支持音频元素。
+                     </audio>
+                </div>
+
+                <!-- Hitech -->
+                <div class="bg-gray-800 rounded-lg p-6 hover:bg-gray-700 transition-colors">
+                    <h3 class="text-xl font-semibold mb-2 text-white">Hitech</h3>
+                    <p class="text-gray-400 mb-4">电子音乐</p>
+                    <audio controls class="w-full bg-gray-900 rounded-lg p-2">
+                        <source src="./Audio/Hitech.mp3" type="audio/mpeg">
+                        您的浏览器不支持音频元素。
+                     </audio>
+                </div>
+
+                <!-- SUPERPOWER-Remake -->
+                <div class="bg-gray-800 rounded-lg p-6 hover:bg-gray-700 transition-colors">
+                    <h3 class="text-xl font-semibold mb-2 text-white">SUPERPOWER-Remake</h3>
+                    <p class="text-gray-400 mb-4">电子音乐</p>
+                    <audio controls class="w-full bg-gray-900 rounded-lg p-2">
+                        <source src="./Audio/SUPERPOWER-Remake.mp3" type="audio/mpeg">
+                        您的浏览器不支持音频元素。
+                     </audio>
+                </div>
+
+                <!-- Color Bass-2022.10 -->
+                <div class="bg-gray-800 rounded-lg p-6 hover:bg-gray-700 transition-colors">
+                    <h3 class="text-xl font-semibold mb-2 text-white">Color Bass-2022.10</h3>
+                    <p class="text-gray-400 mb-4">电子音乐</p>
+                    <audio controls class="w-full bg-gray-900 rounded-lg p-2">
+                        <source src="./Audio/Color Bass-2022.10.mp3" type="audio/mpeg">
+                        您的浏览器不支持音频元素。
+                     </audio>
+                </div>
+
+                <!-- Riddim Dubstep-2025.1 -->
+                <div class="bg-gray-800 rounded-lg p-6 hover:bg-gray-700 transition-colors">
+                    <h3 class="text-xl font-semibold mb-2 text-white">Riddim Dubstep-2025.1</h3>
+                    <p class="text-gray-400 mb-4">电子音乐</p>
+                    <audio controls class="w-full bg-gray-900 rounded-lg p-2">
+                        <source src="./Audio/Riddim Dubstep.wav" type="audio/wav">
+                        您的浏览器不支持音频元素。
+                     </audio>
+                </div>
+
+                <!-- Game8bit_loopmix -->
+                <div class="bg-gray-800 rounded-lg p-6 hover:bg-gray-700 transition-colors">
+                    <h3 class="text-xl font-semibold mb-2 text-white">Game8bit_loopmix</h3>
+                    <p class="text-gray-400 mb-4">游戏音乐</p>
+                    <audio controls class="w-full bg-gray-900 rounded-lg p-2">
+                        <source src="./Audio/Game8bit_loopmix.mp3" type="audio/mpeg">
+                        您的浏览器不支持音频元素。
+                     </audio>
+                </div>
+
+                <!-- 电子&另类流行节选 -->
+                <div class="bg-gray-800 rounded-lg p-6 hover:bg-gray-700 transition-colors">
+                    <h3 class="text-xl font-semibold mb-2 text-white">电子&另类流行节选</h3>
+                    <p class="text-gray-400 mb-4">流行音乐</p>
+                    <audio controls class="w-full bg-gray-900 rounded-lg p-2">
+                        <source src="./Audio/电子&另类流行节选.mp3" type="audio/mpeg">
+                        您的浏览器不支持音频元素。
+                     </audio>
+                </div>
+
+                <!-- Synthwave流行伴奏节选 -->
+                <div class="bg-gray-800 rounded-lg p-6 hover:bg-gray-700 transition-colors">
+                    <h3 class="text-xl font-semibold mb-2 text-white">Synthwave流行伴奏节选</h3>
+                    <p class="text-gray-400 mb-4">流行音乐</p>
+                    <audio controls class="w-full bg-gray-900 rounded-lg p-2">
+                        <source src="./Audio/Synthwave流行伴奏节选.mp3" type="audio/mpeg">
+                        您的浏览器不支持音频元素。
+                     </audio>
+                </div>
+
+                <!-- 流行类Jazz -->
+                <div class="bg-gray-800 rounded-lg p-6 hover:bg-gray-700 transition-colors">
+                    <h3 class="text-xl font-semibold mb-2 text-white">流行类Jazz</h3>
+                    <p class="text-gray-400 mb-4">爵士流行</p>
+                    <audio controls class="w-full bg-gray-900 rounded-lg p-2">
+                        <source src="./Audio/流行类Jazz.mp3" type="audio/mpeg">
+                        您的浏览器不支持音频元素。
+                     </audio>
+                </div>
+
+                <!-- 流行伴奏制作 -->
+                <div class="bg-gray-800 rounded-lg p-6 hover:bg-gray-700 transition-colors">
+                    <h3 class="text-xl font-semibold mb-2 text-white">流行伴奏制作</h3>
+                    <p class="text-gray-400 mb-4">流行音乐</p>
+                    <audio controls class="w-full bg-gray-900 rounded-lg p-2">
+                        <source src="./Audio/流行伴奏制作.mp3" type="audio/mpeg">
+                        您的浏览器不支持音频元素。
+                     </audio>
+                </div>
+
+                <!-- 流行弦乐前奏 -->
+                <div class="bg-gray-800 rounded-lg p-6 hover:bg-gray-700 transition-colors">
+                    <h3 class="text-xl font-semibold mb-2 text-white">流行弦乐前奏</h3>
+                    <p class="text-gray-400 mb-4">流行音乐</p>
+                    <audio controls class="w-full bg-gray-900 rounded-lg p-2">
+                        <source src="./Audio/流行弦乐前奏.mp3" type="audio/mpeg">
+                        您的浏览器不支持音频元素。
+                     </audio>
+                </div>
+                
+                <!-- Jazz_Boombap_Beat -->
+                <div class="bg-gray-800 rounded-lg p-6 hover:bg-gray-700 transition-colors">
+                    <h3 class="text-xl font-semibold mb-2 text-white">Jazz_Boombap_Beat</h3>
+                    <p class="text-gray-400 mb-4">爵士嘻哈</p>
+                    <audio controls class="w-full bg-gray-900 rounded-lg p-2">
+                        <source src="./Audio/Jazz_Boombap_Beat.mp3" type="audio/mpeg">
+                        您的浏览器不支持音频元素。
+                     </audio>
+                </div>
+                
+                <!-- 舞曲类流行仿XCX -->
+                <div class="bg-gray-800 rounded-lg p-6 hover:bg-gray-700 transition-colors">
+                    <h3 class="text-xl font-semibold mb-2 text-white">舞曲类流行仿XCX</h3>
+                    <p class="text-gray-400 mb-4">流行舞曲</p>
+                    <audio controls class="w-full bg-gray-900 rounded-lg p-2">
+                        <source src="./Audio/舞曲类流行仿XCX.mp3" type="audio/mpeg">
+                        您的浏览器不支持音频元素。
+                     </audio>
+                </div>
+            </div>
+
+            <!-- 视频部分 -->
+            <div class="mb-16">
+                <h3 class="text-2xl font-semibold mb-8 text-white text-center">视频</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                    <!-- 可爱类游戏音效&音乐制作 -->
+                    <div class="bg-gray-800 rounded-lg p-6 hover:bg-gray-700 transition-colors cursor-pointer" id="previous-video-card-1">
+                        <h3 class="text-xl font-semibold mb-2 text-white">可爱类游戏音效&音乐制作</h3>
+                        <p class="text-gray-400 mb-4">游戏音乐</p>
+                        <div class="bg-gray-900 rounded-lg p-4 flex items-center justify-center">
+                            <button class="w-12 h-12 rounded-full bg-blue-600/90 flex items-center justify-center play-button hover:bg-blue-700 transition-colors" id="previous-video-play-btn-1">
+                                <i class="fa fa-play text-white text-xl"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 艺术家 -->
+    <section id="artist" class="py-20 bg-darker">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white">关于我</h2>
+            </div>
+
+            <div class="flex flex-col md:flex-row items-center md:items-start gap-10 max-w-5xl mx-auto">
+                <div class="md:w-1/3">
+                    <div class="rounded-lg overflow-hidden border-4 border-blue-900/30 shadow-xl transform rotate-2 hover:rotate-0 transition-transform duration-500">
+                        <img src="./Images/art.jpg" alt="艺术家照片" class="w-full">
+                    </div>
+                </div>
+                <div class="md:w-2/3">
+                    <h3 class="text-2xl font-bold mb-6 text-white">ZHIHUAN LIN</h3>
+                    <p class="text-gray-300 mb-6 leading-relaxed">
+                        艺名:LanKi兰基/Ropaer六帕米尔，来自中国广东
+                        <br>
+                        以电子音乐制作为核心，亦涉足多风格音乐创作，同时深耕交互设计与游戏音频工程
+                    </p>
+                    <div class="flex flex-wrap gap-3 mb-8">
+                        <span class="bg-blue-900/30 text-blue-300 px-4 py-1 rounded-full text-sm">电子音乐</span>
+                        <span class="bg-blue-900/30 text-blue-300 px-4 py-1 rounded-full text-sm">流行音乐</span>
+                        <span class="bg-blue-900/30 text-blue-300 px-4 py-1 rounded-full text-sm">实验音乐</span>
+                        <span class="bg-blue-900/30 text-blue-300 px-4 py-1 rounded-full text-sm">音乐制作</span>
+                        <span class="bg-blue-900/30 text-blue-300 px-4 py-1 rounded-full text-sm">交互设计</span>
+                        <span class="bg-blue-900/30 text-blue-300 px-4 py-1 rounded-full text-sm">音频工程</span>
+                    </div>
+                    <a href="#contact" class="inline-flex items-center text-blue-400 hover:text-blue-300 transition-colors font-medium">
+                        了解更多 <i class="fa fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系我们 -->
+    <section id="contact" class="py-20 bg-dark">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white">联系我们</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">有任何问题或合作意向？请随时联系我们。</p>
+            </div>
+
+            <div class="max-w-3xl mx-auto bg-gray-900 rounded-lg overflow-hidden p-8 md:p-10">
+                <form id="form" class="space-y-6">
+                    <div class="field">
+                        <label for="title" class="block text-gray-400 mb-2">主题</label>
+                        <input type="text" name="title" id="title" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors duration-300" placeholder="请输入主题">
+                    </div>
+                    <div class="field">
+                        <label for="name" class="block text-gray-400 mb-2">姓名</label>
+                        <input type="text" name="name" id="name" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors duration-300" placeholder="请输入您的姓名">
+                    </div>
+                    <div class="field">
+                        <label for="time" class="block text-gray-400 mb-2">时间</label>
+                        <input type="text" name="time" id="time" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors duration-300" placeholder="请输入时间">
+                    </div>
+                    <div class="field">
+                        <label for="message" class="block text-gray-400 mb-2">留言</label>
+                        <input type="text" name="message" id="message" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors duration-300" placeholder="请输入您的留言">
+                    </div>
+                    <div class="field">
+                        <label for="email" class="block text-gray-400 mb-2">邮箱</label>
+                        <input type="text" name="email" id="email" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors duration-300" placeholder="请输入您的邮箱">
+                    </div>
+                    <input type="submit" id="button" value="发送留言" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 rounded-lg transition-colors duration-300">
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-darker py-12 border-t border-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-10">
+                <a href="#home" class="text-2xl font-bold tracking-wider text-white mb-6 md:mb-0">ZHIHUAN LIN</a>
+                <div class="flex items-center justify-center gap-8 text-gray-400">
+                    <a href="https://space.bilibili.com/49943449?spm_id_from=333.1007.0.0" target="_blank" class="hover:text-white transition-colors flex flex-col items-center relative group transition-all duration-300 hover:-translate-y-3 hover:shadow-lg hover:shadow-blue-500/20">
+                        <img src="./Images/哔哩哔哩.png" alt="哔哩哔哩" class="w-10 h-10 mb-2 object-contain">
+                        <span class="absolute -bottom-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs py-1 px-3 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">哔哩哔哩</span>
+                    </a>
+                    <a href="https://www.xiaohongshu.com/user/profile/64b5067b000000002b0084e5" target="_blank" class="hover:text-white transition-colors flex flex-col items-center relative group transition-all duration-300 hover:-translate-y-3 hover:shadow-lg hover:shadow-blue-500/20">
+                        <img src="./Images/小红书.png" alt="小红书" class="w-10 h-10 mb-2 object-contain">
+                        <span class="absolute -bottom-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs py-1 px-3 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">小红书</span>
+                    </a>
+                    <a href="https://v.douyin.com/A9B-tAOpcrE/" target="_blank" class="hover:text-white transition-colors flex flex-col items-center relative group transition-all duration-300 hover:-translate-y-3 hover:shadow-lg hover:shadow-blue-500/20">
+                        <img src="./Images/抖音.png" alt="抖音" class="w-10 h-10 mb-2 object-contain">
+                        <span class="absolute -bottom-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs py-1 px-3 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">抖音</span>
+                    </a>
+                    <a href="https://y.qq.com/n/ryqq/singer/002lg1WQ3B4dHI" target="_blank" class="hover:text-white transition-colors flex flex-col items-center relative group transition-all duration-300 hover:-translate-y-3 hover:shadow-lg hover:shadow-blue-500/20">
+                        <img src="./Images/QQ音乐.png" alt="QQ音乐" class="w-10 h-10 mb-2 object-contain">
+                        <span class="absolute -bottom-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs py-1 px-3 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">QQ音乐</span>
+                    </a>
+                    <a href="https://music.163.com/#/artist?id=32980792" target="_blank" class="hover:text-white transition-colors flex flex-col items-center relative group transition-all duration-300 hover:-translate-y-3 hover:shadow-lg hover:shadow-blue-500/20">
+                        <img src="./Images/网易云音乐.png" alt="网易云音乐" class="w-10 h-10 mb-2 object-contain">
+                        <span class="absolute -bottom-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs py-1 px-3 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">网易云音乐</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 pt-8 text-center text-gray-500 text-sm">
+                <p>&copy; 2023 ZHIHUAN LIN. 保留所有权利。</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 引入EmailJS脚本 -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+        emailjs.init('W2z0hxuF4OECMJ83E');
+    </script>
+
+    <!-- 底部悬停区域 -->
+    <div id="bottom-hover-area" class="fixed bottom-0 left-0 w-full h-16 bg-transparent z-40"></div>
+
+    <!-- 底部固定播放器 -->
+    <div id="music-player" class="fixed bottom-0 left-0 w-full bg-gray-900 border-t border-gray-800 p-3 z-50 opacity-0 translate-y-full transition-all duration-300 pointer-events-none">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-3">
+                <div class="flex items-center gap-3 flex-shrink-0">
+                    <div class="w-12 h-12 bg-blue-600/20 rounded flex items-center justify-center">
+                        <i class="fa fa-music text-xl text-blue-500"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-white font-medium" id="player-track-name">未播放</h4>
+                    </div>
+                </div>
+
+                <div class="flex-grow min-w-0">
+                    <div class="flex justify-between text-xs text-gray-400 mb-1">
+                        <span id="player-current-time">00:00</span>
+                        <span id="player-total-time">00:00</span>
+                    </div>
+                    <div class="relative h-1.5 bg-gray-700 rounded-full overflow-hidden">
+                        <div class="absolute top-0 left-0 h-full bg-blue-500 w-0 rounded-full" id="player-progress-bar"></div>
+                        <div class="absolute top-0 left-0 transform -translate-x-1/2 -translate-y-1/4 w-3 h-3 bg-white rounded-full cursor-pointer" id="player-progress-handle"></div>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-3 flex-shrink-0">
+                    <button class="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white hover:bg-blue-600 transition-colors" id="player-play-btn">
+                        <i class="fa fa-play"></i>
+                    </button>
+                    <div class="flex items-center gap-2 hidden sm:flex">
+                        <i class="fa fa-volume-up text-gray-400"></i>
+                        <div class="relative h-1.5 bg-gray-700 rounded-full overflow-hidden w-20">
+                            <div class="absolute top-0 left-0 h-full bg-blue-500 w-3/4 rounded-full" id="player-volume-bar"></div>
+                            <div class="absolute top-0 left-3/4 transform -translate-x-1/2 -translate-y-1/4 w-3 h-3 bg-white rounded-full cursor-pointer" id="player-volume-handle"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 移动菜单切换
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                mobileMenu.classList.add('hidden');
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // 联系表单提交 - 使用EmailJS v4
+        const btn = document.getElementById('button');
+
+        document.getElementById('form')
+          .addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            btn.value = '发送中...';
+
+            const serviceID = 'service_xc0gf8c';
+            const templateID = 'template_88dmaip';
+
+            emailjs.sendForm(serviceID, templateID, this)
+             .then(() => {
+               btn.value = '发送留言';
+               alert('发送成功！');
+             }, (err) => {
+               btn.value = '发送留言';
+               alert(JSON.stringify(err));
+             });
+        });
+
+        // 音频控制器
+        document.addEventListener('DOMContentLoaded', () => {
+            // 创建全局音频元素
+            const player = document.createElement('audio');
+            let currentAudioIndex = -1;
+
+            // 获取DOM元素
+            const playButtons = document.querySelectorAll('.play-button');
+            const audioElements = document.querySelectorAll('.album-audio');
+            const playerContainer = document.getElementById('music-player');
+            const playerPlayBtn = document.getElementById('player-play-btn');
+            const playerTrackName = document.getElementById('player-track-name');
+            const playerCurrentTime = document.getElementById('player-current-time');
+            const playerTotalTime = document.getElementById('player-total-time');
+            const playerProgressBar = document.getElementById('player-progress-bar');
+            const playerProgressHandle = document.getElementById('player-progress-handle');
+            const playerVolumeBar = document.getElementById('player-volume-bar');
+            const playerVolumeHandle = document.getElementById('player-volume-handle');
+
+            // 显示播放器函数
+            function showPlayer() {
+                playerContainer.classList.remove('opacity-0', 'translate-y-full', 'pointer-events-none');
+            }
+
+            // 隐藏播放器函数
+            function hidePlayer() {
+                playerContainer.classList.add('opacity-0', 'translate-y-full', 'pointer-events-none');
+            }
+
+            // 初始化音量
+            player.volume = 0.75;
+
+            // 获取底部悬停区域
+            const bottomHoverArea = document.getElementById('bottom-hover-area');
+            let playerHideTimeout;
+
+            // 鼠标进入底部区域时显示播放器
+            bottomHoverArea.addEventListener('mouseenter', () => {
+                showPlayer();
+                // 清除之前的隐藏计时器
+                clearTimeout(playerHideTimeout);
+            });
+
+            // 鼠标离开底部区域时，如果播放器暂停则延迟隐藏
+            bottomHoverArea.addEventListener('mouseleave', () => {
+                if (player.paused) {
+                    clearTimeout(playerHideTimeout);
+                    playerHideTimeout = setTimeout(hidePlayer, 2000); // 2秒后隐藏
+                }
+            });
+
+            // 专辑播放按钮点击事件
+            playButtons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    const audio = audioElements[index];
+                    const trackName = audio.closest('.album-card').querySelector('h4').textContent;
+
+                    // 如果点击的是当前播放的音频
+                    if (index === currentAudioIndex) {
+                        if (player.paused) {
+                            player.play();
+                            button.innerHTML = '<i class="fa fa-pause text-white text-2xl"></i>';
+                            playerPlayBtn.innerHTML = '<i class="fa fa-pause"></i>';
+                        } else {
+                            player.pause();
+                            button.innerHTML = '<i class="fa fa-play text-white text-2xl"></i>';
+                            playerPlayBtn.innerHTML = '<i class="fa fa-play"></i>';
+                        }
+                    } else {
+                        // 加载新音频
+                        currentAudioIndex = index;
+                        player.src = audio.querySelector('source').src;
+                        playerTrackName.textContent = trackName;
+                        player.load();
+                        player.play();
+                        // 显示播放器
+                        showPlayer();
+
+                        // 更新按钮状态
+                        playButtons.forEach((btn, i) => {
+                            if (i === index) {
+                                btn.innerHTML = '<i class="fa fa-pause text-white text-2xl"></i>';
+                            } else {
+                                btn.innerHTML = '<i class="fa fa-play text-white text-2xl"></i>';
+                            }
+                        });
+                        playerPlayBtn.innerHTML = '<i class="fa fa-pause"></i>';
+                    }
+                });
+            });
+
+            // 播放器播放/暂停按钮
+            playerPlayBtn.addEventListener('click', () => {
+                if (currentAudioIndex === -1) return;
+
+                if (player.paused) {
+                    player.play();
+                    showPlayer();
+                    playerPlayBtn.innerHTML = '<i class="fa fa-pause"></i>';
+                    playButtons[currentAudioIndex].innerHTML = '<i class="fa fa-pause text-white text-2xl"></i>';
+                } else {
+                    player.pause();
+                    playerPlayBtn.innerHTML = '<i class="fa fa-play"></i>';
+                    playButtons[currentAudioIndex].innerHTML = '<i class="fa fa-play text-white text-2xl"></i>';
+                    // 暂停时隐藏播放器
+                    hidePlayer();
+                }
+            });
+
+            // 进度条更新
+            player.addEventListener('timeupdate', () => {
+                const percentage = (player.currentTime / player.duration) * 100;
+                playerProgressBar.style.width = `${percentage}%`;
+                playerProgressHandle.style.left = `${percentage}%`;
+
+                // 更新时间显示
+                playerCurrentTime.textContent = formatTime(player.currentTime);
+                if (!isNaN(player.duration)) {
+                    playerTotalTime.textContent = formatTime(player.duration);
+                }
+            });
+
+            // 点击进度条跳转
+            playerProgressBar.parentElement.addEventListener('click', (e) => {
+                const rect = playerProgressBar.parentElement.getBoundingClientRect();
+                const percent = (e.clientX - rect.left) / rect.width;
+                player.currentTime = percent * player.duration;
+            });
+
+            // 音量控制
+            playerVolumeHandle.addEventListener('mousedown', (e) => {
+                e.preventDefault();
+                const moveVolume = (e) => {
+                    const rect = playerVolumeBar.parentElement.getBoundingClientRect();
+                    let percent = (e.clientX - rect.left) / rect.width;
+                    percent = Math.max(0, Math.min(1, percent));
+                    playerVolumeBar.style.width = `${percent * 100}%`;
+                    playerVolumeHandle.style.left = `${percent * 100}%`;
+                    player.volume = percent;
+                };
+
+                document.addEventListener('mousemove', moveVolume);
+                document.addEventListener('mouseup', () => {
+                    document.removeEventListener('mousemove', moveVolume);
+                });
+            });
+
+            // 监听音频结束事件
+            player.addEventListener('ended', () => {
+                if (currentAudioIndex !== -1) {
+                    playButtons[currentAudioIndex].innerHTML = '<i class="fa fa-play text-white text-2xl"></i>';
+                    playerPlayBtn.innerHTML = '<i class="fa fa-play"></i>';
+                    // 音频结束后隐藏播放器
+                    hidePlayer();
+                }
+            });
+
+            // 格式化时间
+            function formatTime(seconds) {
+                const minutes = Math.floor(seconds / 60);
+                const secs = Math.floor(seconds % 60);
+                return `${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+            }
+        });
+    </script>
+</body>
+</html>
